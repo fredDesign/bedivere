@@ -1,0 +1,106 @@
+.faq {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  &:before{
+    content: "";
+    width: 20vh;
+    height: 20vh;
+    background: url('../images/faqtriangle.svg') no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  .accordions-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    & > div {
+      width: 90%;
+    }
+    .single-accordion-container {
+      display: flex;
+      flex-direction: column;
+      margin: 20px 0px;
+      width: 100%;
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+      &:first-of-type{
+        margin-top: 20px;
+      }
+      .accordion {
+        display: flex;
+        height: 7vh;
+        background-color: #21212e;
+        .question-container {
+          display: flex;
+          width: 85%;
+          align-items: center;
+          padding-left: 20px;
+          font-size: 3.5vw;
+        }
+        .accordion-icon-container {
+          width: 15%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: #262634;
+          height: 100%;
+
+          img {
+            width: 29%;
+            height: 40%;
+          }
+        }
+      }
+      .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        padding: 0px 20px;
+        text-align: justify;
+      }
+    }
+  }
+}
+@media(min-width:576px){
+  .faq {
+    .accordions-container {
+      & > div {
+        width: 50%;
+        max-width: 400px;
+        margin: 10px;
+      }
+      .single-accordion-container {
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+        &:first-of-type{
+          margin-top: 0;
+        }
+        .accordion {
+          display: flex;
+          height: 7vh;
+          cursor: pointer;
+          .question-container {
+            font-size: 1.7vw;
+          }
+        }
+      }
+    }
+  }
+}
+@media(min-width:992px){
+  .faq {
+    .accordions-container {
+      .single-accordion-container {
+        .accordion {
+          .question-container {
+            font-size: 1.2vw;
+          }
+        }
+      }
+    }
+
+  }
+}

@@ -1,0 +1,153 @@
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.pricing {
+  flex-direction: column;
+  align-items: center;
+  .time-period-choice-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 1px solid white;
+    width: 80%;
+    height: 5vh;
+    border-radius: 5%;
+    button {
+      border: none;
+      outline: none;
+      height: 100%;
+      width: 50%;
+      border-radius: 0;
+      &.active {
+        background: rgb(78, 78, 78);
+      }
+    }
+  }
+  .plans-card-container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin-top: 100px;
+    align-items: center;
+    position: relative;
+    .plan-card {
+      width: 80%;
+      height: 75%;
+      margin: 10px;
+      & > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+      .plan-title-container {
+        background-color: #39394d;
+        margin-top: 25px;
+        padding: 10px 0px;
+        .plan-title,
+        .plan-subtitle {
+          margin: 0;
+        }
+        .plan-title {
+          font-size: 6vw;
+        }
+      }
+      .plan-info-container {
+        .plan-price,
+        .plan-price-period {
+          margin: 0;
+        }
+        .plan-price {
+          font-size: 6vw;
+          font-weight: bolder;
+          margin-top: 20px;
+        }
+        .plan-price-period {
+          font-size: 4vw;
+        }
+        .plan-description {
+          margin: 40px 0px;
+          list-style: none;
+          padding: 0;
+        }
+        button {
+          width: 50%;
+          height: 50px;
+          margin-bottom: 20px;
+        }
+      }
+      &.front {
+        z-index: 1;
+      }
+      &.animated {
+        animation: zoomIn 500ms;
+      }
+    }
+  }
+}
+@media (min-width: 576px) {
+  .pricing {
+    .time-period-choice-container {
+      width: 30%;
+      button {
+        cursor: pointer;
+      }
+    }
+    .plans-card-container {
+      display: flex;
+      flex-direction: row;
+      width: 80%;
+      margin-top: 100px;
+      .plan-card {
+        margin: 0;
+        flex: 1;
+        height: 75%;
+        .plan-title-container {
+          .plan-title {
+            font-size: 2vw;
+          }
+        }
+        .plan-info-container {
+          .plan-price {
+            font-size: 3vw;
+          }
+          .plan-price-period {
+            font-size: 1.5vw;
+          }
+
+          button {
+          }
+        }
+        &.front {
+          height: 90%;
+          background: #21212e;
+        }
+      }
+    }
+  }
+}
+@media (min-width: 1200px) {
+  .pricing {
+    .plans-card-container {
+      .plan-card {
+        .plan-info-container {
+          .plan-price {
+            font-size: 2vw;
+          }
+          .plan-price-period {
+            font-size: 1vw;
+          }
+        }
+      }
+    }
+  }
+}
