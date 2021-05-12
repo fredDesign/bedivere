@@ -16,9 +16,9 @@
     content: "";
     width: 40vw;
     height: 40vw;
-    background: url("../images/partners-triangle.svg")  no-repeat;
+    background: url("../images/partners-horse.png")  no-repeat;
     background-size: cover;
-    top: 0%;
+    top: 2%;
     transform: translateY(-70%);
     z-index: -1;
     left: 2%;
@@ -28,7 +28,7 @@
     content: "";
     width: 50vw;
     height: 50vw;
-    background: url("../images/partners-circle.svg") no-repeat;
+    background: url("../images/parterns_king.png") no-repeat;
     background-size: cover;
     bottom: 0;
     right: 0;
@@ -107,7 +107,7 @@
       }
       &:after {
       width: 25vw;
-      height: 25vw;
+      height: 22vw;
       transform: translate(50%, 50%);
       }
     .right-column {

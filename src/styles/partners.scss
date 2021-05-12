@@ -11,7 +11,7 @@
     content: "";
     width: 40vw;
     height: 40vw;
-    background: url("../images/partners-triangle.svg")  no-repeat;
+    background: url("../images/parterns_king.png")  no-repeat;
     background-size: cover;
     top: 0%;
     transform: translateY(-70%);
@@ -23,11 +23,11 @@
     content: "";
     width: 50vw;
     height: 50vw;
-    background: url("../images/partners-circle.svg") no-repeat;
+    background: url("../images/parterns_queen.png") no-repeat;
     background-size: cover;
-    bottom: 0;
-    right: 0;
-    transform: translate(50%, 100%);
+    bottom: 10%;
+    right: 10%;
+    transform: translate(50%, 50%);
     z-index: -1;
   }
   .left-column {
