@@ -115,95 +115,121 @@ const displacementSlider = function(opts) {
     object.position.set(0, 0, 0);
     scene.add(object);
 
+    let slTimer;
+
+    let isAnimating = false;
+
+    let toSlide = (elem) => {
+        if( !isAnimating ) {
+            clearInterval(slTimer);
+             slTimer= setInterval(function(){
+                autoSlide();
+            }, 7000);
+
+        isAnimating = true;
+        document.getElementById('pagination').querySelectorAll('.active')[0].className = '';
+        elem.className = 'active';
+
+        let slideId = parseInt( elem.dataset.slide, 10 );
+
+        mat.uniforms.nextImage.value = sliderImages[slideId];
+        mat.uniforms.nextImage.needsUpdate = true;
+
+        gsap.to( mat.uniforms.dispFactor, 1, {
+            value: 1,
+            ease: 'Expo.easeInOut',
+            onComplete: function () {
+                mat.uniforms.currentImage.value = sliderImages[slideId];
+                mat.uniforms.currentImage.needsUpdate = true;
+                mat.uniforms.dispFactor.value = 0.0;
+                isAnimating = false;
+            }
+        });
+
+        let slideTitleEl = document.getElementById('slide-title');
+        let slideStatusEl = document.getElementById('slide-status');
+        let nextSlideTitle = document.querySelectorAll(`[data-slide-title="${slideId}"]`)[0].innerHTML;
+        let nextSlideStatus = document.querySelectorAll(`[data-slide-status="${slideId}"]`)[0].innerHTML;
+
+        gsap.fromTo( slideTitleEl, 0.5,
+            {
+                autoAlpha: 1,
+                filter: 'blur(0px)',
+                y: 0
+            },
+            {
+                autoAlpha: 0,
+                filter: 'blur(10px)',
+                y: 20,
+                ease: 'Expo.easeIn',
+                onComplete: function () {
+                    slideTitleEl.innerHTML = nextSlideTitle;
+
+                    gsap.to( slideTitleEl, 0.5, {
+                        autoAlpha: 1,
+                        filter: 'blur(0px)',
+                        y: 0,
+                    })
+                }
+            });
+
+        gsap.fromTo( slideStatusEl, 0.5,
+            {
+                autoAlpha: 1,
+                filter: 'blur(0px)',
+                y: 0
+            },
+            {
+                autoAlpha: 0,
+                filter: 'blur(10px)',
+                y: 20,
+                ease: 'Expo.easeIn',
+                onComplete: function () {
+                    slideStatusEl.innerHTML = nextSlideStatus;
+
+                    gsap.to( slideStatusEl, 0.5, {
+                        autoAlpha: 1,
+                        filter: 'blur(0px)',
+                        y: 0,
+                        delay: 0.1,
+                    })
+                }
+            });
+        }
+    }
+
     let addEvents = function(){
 
         let pagButtons = Array.from(document.getElementById('pagination').querySelectorAll('button'));
-        let isAnimating = false;
+
 
         pagButtons.forEach( (el) => {
 
             el.addEventListener('click', function() {
-
-                if( !isAnimating ) {
-
-                    isAnimating = true;
-
-                    document.getElementById('pagination').querySelectorAll('.active')[0].className = '';
-                    this.className = 'active';
-
-                    let slideId = parseInt( this.dataset.slide, 10 );
-
-                    mat.uniforms.nextImage.value = sliderImages[slideId];
-                    mat.uniforms.nextImage.needsUpdate = true;
-
-                    gsap.to( mat.uniforms.dispFactor, 1, {
-                        value: 1,
-                        ease: 'Expo.easeInOut',
-                        onComplete: function () {
-                            mat.uniforms.currentImage.value = sliderImages[slideId];
-                            mat.uniforms.currentImage.needsUpdate = true;
-                            mat.uniforms.dispFactor.value = 0.0;
-                            isAnimating = false;
-                        }
-                    });
-
-                    let slideTitleEl = document.getElementById('slide-title');
-                    let slideStatusEl = document.getElementById('slide-status');
-                    let nextSlideTitle = document.querySelectorAll(`[data-slide-title="${slideId}"]`)[0].innerHTML;
-                    let nextSlideStatus = document.querySelectorAll(`[data-slide-status="${slideId}"]`)[0].innerHTML;
-
-                    gsap.fromTo( slideTitleEl, 0.5,
-                        {
-                            autoAlpha: 1,
-                            filter: 'blur(0px)',
-                            y: 0
-                        },
-                        {
-                            autoAlpha: 0,
-                            filter: 'blur(10px)',
-                            y: 20,
-                            ease: 'Expo.easeIn',
-                            onComplete: function () {
-                                slideTitleEl.innerHTML = nextSlideTitle;
-
-                                gsap.to( slideTitleEl, 0.5, {
-                                    autoAlpha: 1,
-                                    filter: 'blur(0px)',
-                                    y: 0,
-                                })
-                            }
-                        });
-
-                    gsap.fromTo( slideStatusEl, 0.5,
-                        {
-                            autoAlpha: 1,
-                            filter: 'blur(0px)',
-                            y: 0
-                        },
-                        {
-                            autoAlpha: 0,
-                            filter: 'blur(10px)',
-                            y: 20,
-                            ease: 'Expo.easeIn',
-                            onComplete: function () {
-                                slideStatusEl.innerHTML = nextSlideStatus;
-
-                                gsap.to( slideStatusEl, 0.5, {
-                                    autoAlpha: 1,
-                                    filter: 'blur(0px)',
-                                    y: 0,
-                                    delay: 0.1,
-                                })
-                            }
-                        });
-
-                }
+                    ///////*******///////
+                    toSlide(this);
+                    ///////*******///////
 
             });
 
         });
 
     };
+
+    let autoSlide = () => {
+        let nextSlide = document.getElementById('pagination').querySelectorAll('.active')[0].nextElementSibling;
+        if (nextSlide == undefined) {
+            nextSlide =document.getElementById('pagination').querySelectorAll('button')[0]
+        }
+        console.log('thick');
+        toSlide(nextSlide)
+    }
+
+    slTimer= setInterval(function(){
+        autoSlide();
+    }, 7000);
+
+
 
     addEvents();
 
