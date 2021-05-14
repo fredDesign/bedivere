@@ -11,12 +11,12 @@
     content: "";
     width: 40vw;
     height: 40vw;
-    background: url("../images/parterns_king.png")  no-repeat;
+    background: url("../images/hand.png")  no-repeat;
     background-size: cover;
     top: 0%;
     transform: translateY(-70%);
     z-index: -1;
-    left: 2%;
+    left: -1%;
   }
   &::after {
     position: absolute;
@@ -171,8 +171,8 @@
 @media (min-width: 992px) {
   .partners {
     &:before {
-      width: 15vw;
-      height: 15vw;
+      width: 50vw;
+      height: 34vw;
       transform: translateY(0%);
       }
       &:after {

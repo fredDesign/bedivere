@@ -5,24 +5,13 @@
   padding: 0px ;
   flex-direction: column;
   justify-content: center;
+  min-height: auto;
 }
 .propos {
   display: flex;
   align-items: center;
   flex-wrap: wrap-reverse;
   position: relative;
-  &:before {
-    position: absolute;
-    content: "";
-    width: 40vw;
-    height: 40vw;
-    background: url("../images/partners-horse.png")  no-repeat;
-    background-size: cover;
-    top: 2%;
-    transform: translateY(-70%);
-    z-index: -1;
-    left: 2%;
-  }
   &::after {
     position: absolute;
     content: "";
@@ -51,7 +40,7 @@
     .row {
       display: flex;
       justify-content: flex-start;
-      height: 80px;
+      height: auto;
 
 
 
@@ -82,7 +71,7 @@
         margin: 10px;
       }
       .row {
-        height: 80px;
+        height: auto;
 
 
       }

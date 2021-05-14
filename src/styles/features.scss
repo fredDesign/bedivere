@@ -1,7 +1,10 @@
 .features {
   flex-direction: column;
   position: relative;
-  background: $Blacked;
+  background: linear-gradient(white 10%, white 30%, $LighterGrey 90%);
+  &.section {
+    color: $Blacked;
+  }
   &:after {
     content: "";
     width: 20vw;
@@ -12,6 +15,7 @@
     transform: translate(0, 60%);
     background: url("../images/features-square.png") no-repeat;
     background-size: contain;
+    display: none;
   }
   .features-info-column {
     display: flex;
@@ -54,7 +58,7 @@
         max-width: 250px;
         padding: 0 0 0px 0px;
         margin: 20px;
-        background: rgba($BlueMinded,0.2);
+        background: $white;
         overflow: hidden;
         .feature-card--icon-container {
           background-color: transparent;
@@ -67,7 +71,7 @@
           img {
             width: 96px;
             height: 96px;
-            margin-left: 20px;
+            margin-left: 0px;
           }
         }
         .feature-card--text-container {
@@ -80,9 +84,7 @@
             padding-top: 1rem;
           }
         }
-        &:nth-of-type(even) {
-          align-self: flex-end;
-        }
+
       }
       .cards-column-left,
       .cards-column-right {
@@ -287,10 +289,8 @@
       .right-column {
         flex-direction: row;
         .features-card {
-          align-self: center;
-          &:nth-of-type(even) {
-            align-self: center;
-          }
+          align-self: flex-start;
+
         }
         .cards-column-left,
         .cards-column-right {
@@ -299,10 +299,9 @@
         }
         .cards-column-left {
           margin-right: 50px;
-          padding-bottom: 100px;
+          padding-bottom: 20px;
         }
         .cards-column-right {
-          padding-top: 100px;
         }
       }
     }
@@ -316,9 +315,11 @@
     }
     .features-first-row {
       flex-direction: column;
-
+      max-width: 1080px;
+      margin: auto;
+      margin-top: 100px;
       .right-column {
-        flex-direction: row;
+        flex-direction: column;
         width: 100%;
         .features-card {
           max-width: 90%;
@@ -326,22 +327,24 @@
         .cards-column-left,
         .cards-column-right {
           display: flex;
-          flex-direction: column;
-          width: 50%;
+          flex-direction: row;
+          width: 100%;
         }
         .cards-column-left {
           margin-right: 0;
-          padding-bottom: 100px;
+          padding-bottom: 20px;
         }
         .cards-column-right {
-          padding-top: 100px;
-          padding-bottom: 100px;
+          padding-bottom: 20px;
         }
       }
     }
     .features-second-row {
       flex-direction: column;
       align-items: flex-start;
+      max-width: 1080px;
+      margin: auto;
+      margin-top: 100px;
       .features-info-column {
         margin-left: 0px;
         width: 100%;

@@ -10,7 +10,7 @@
     .website-logo {
       height: 50px;
       > * {
-        fill:$white
+        fill:$Blacked
       }
     }
   }
@@ -58,5 +58,11 @@
         }
       }
     }
+  }
+}
+
+.svg-white {
+  > * {
+    fill:white
   }
 }
