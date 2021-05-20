@@ -22,6 +22,7 @@ body,html{
   overflow-x: hidden;
   height: 100vh;
   scroll-behavior: smooth;
+  position: relative;
 }
 body {
   background-color: $bgcol;
