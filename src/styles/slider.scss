@@ -14,8 +14,8 @@
 
   border-radius: 1.5rem;
   canvas {
-    width: 150%;
-    height: 150%;
+
+    zoom: 1.2;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -26,10 +26,15 @@
   img {
     opacity: 0;
     width: 100%;
-    max-width: 1200px;
+    //max-width: 1200px;
 
+    max-height: none;
+    max-width: none;
     position: relative;
     z-index: 0;
+    @media (min-width: 576px) {
+      width: 120%;
+    }
   }
 }
 
@@ -47,7 +52,7 @@
   top: 50%;
   transform: translate(-50%,-50%);
   @media screen and (min-width: 1280px) {
-    max-width: 1060px;
+    //max-width: 1060px;
   }
 }
 
@@ -56,16 +61,17 @@
 
   h2 {
     font-family: 'Tinos', serif;
-    font-size: 30px;
+    font-size: 28px;
     letter-spacing: -1px;
     color: $Blacked;
-    line-height: 30px;
-    margin: 20px 0 60px;
+    line-height: 28px;
+    margin: 20px 0 10px;
     text-transform: uppercase;
     font-weight: 600;
     @media screen and (min-width: 800px) {
-      font-size: 50px;
-      line-height: 50px;
+      font-size: 40px;
+      line-height: 41px;
+      margin-bottom: 15px;
     }
     @media screen and (min-width: 1040px) {
       font-size: 60px;
@@ -111,7 +117,7 @@
     color: $Blacked;
     text-shadow: 1px 1px 4px $LighterGrey,0px 0px 12px $LighterGrey;
 
-    @media screen and (min-width: 800px) {
+    @media screen and (min-width: 992px) {
 
       width: 70%;
       font-size: 24px;
@@ -237,9 +243,8 @@
     overflow: hidden;
     background: transparent;
     max-width: 1280px;
-    height: calc(80% - 5rem);
+    height: min(70vh,400px);
     box-shadow: 0px 0px 100px 5px #ffffff99;
-    margin: 10rem auto;
   }
 }
 
@@ -251,13 +256,25 @@
     overflow: hidden;
     background: transparent;
     max-width: 1280px;
-    height: calc(100% - 20rem);
+    height: min(calc(100% - 20rem) ,400px);
     box-shadow: 0px 0px 100px 5px #ffffff99;
     padding-bottom: 50%;
   }
 }
 @media (min-width: 1480px) {
   #slider {
-    padding-bottom:  min(35%, 200px);
+    padding-bottom:  max(80vh, 600px);
+    canvas {
+
+      zoom: 1.1;}
   }
 }
+@media (min-width: 1680px) {
+  #slider {
+    padding-bottom:  max(80vh, 600px);
+    canvas {
+
+      zoom: 1.25;}
+  }
+}
+
