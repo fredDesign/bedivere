@@ -8,29 +8,30 @@
   overflow: hidden;
   background: transparent;
   max-width: 1280px;
-  height: 320px;
+  height: 394px;
   box-shadow: 0px 0px 100px 5px #ffffff99;
   margin: 2rem auto;
 
   border-radius: 1.5rem;
   canvas {
-
+    min-height: 100%;
     zoom: 1.2;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
+    opacity: 0.66;
   }
 
   img {
     opacity: 0;
-    width: 100%;
+    width: 150%;
     //max-width: 1200px;
 
     max-height: none;
     max-width: none;
-    position: relative;
+    position: absolute;
     z-index: 0;
     @media (min-width: 576px) {
       width: 120%;
@@ -114,6 +115,7 @@
     font-family: 'Tinos', serif;
     font-weight: 400;
     font-size: 18px;
+    line-height: 1.2;
     color: $Blacked;
     text-shadow: 1px 1px 4px $LighterGrey,0px 0px 12px $LighterGrey;
 
@@ -245,6 +247,10 @@
     max-width: 1280px;
     height: min(70vh,400px);
     box-shadow: 0px 0px 100px 5px #ffffff99;
+    canvas {
+
+      opacity:1;
+    }
   }
 }
 
