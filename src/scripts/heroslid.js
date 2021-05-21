@@ -41,33 +41,56 @@ const displacementSlider = function(opts) {
 
         }
     `;
-    let ratio
-    let images = opts.images, image, sliderImages = [];;
-    let canvasWidth = images[0].clientWidth;
-    let canvasHeight = images[0].clientHeight;
-    console.log(canvasHeight);
-    let parent = opts.parent;
-    let renderWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-    let renderHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-
     let renderW, renderH;
-
-    if( renderWidth > canvasWidth ) {
-        renderW = canvasWidth;
-        ratio = renderHeight / renderWidth
-    } else {
-        renderW = canvasWidth;
-        ratio = renderHeight /renderWidth
-    }
-    renderH = renderW *ratio;
-
+    let ratio;
+    let parent = opts.parent;
+    let images = opts.images, image, sliderImages = [];
+    let geometry;
     let renderer = new THREE.WebGLRenderer({
         antialias: false,
     });
 
     renderer.setPixelRatio( window.devicePixelRatio );
     renderer.setClearColor( 0xFFFFFF, 0.0 );
-    renderer.setSize( renderW, renderH );
+    let camera;
+
+    let setsize =()=> {
+        parent = opts.parent;
+        let canvasWidth = images[0].clientWidth;
+        let canvasHeight = images[0].clientHeight;
+        let renderWidth =  images[0].clientWidth ;
+        let renderHeight = images[0].clientHeight ;
+        if( renderWidth > canvasWidth ) {
+            renderW = canvasWidth;
+            ratio = renderHeight / renderWidth
+        } else {
+            renderW = canvasWidth;
+            ratio = renderHeight /renderWidth
+        }
+        renderH = renderW *ratio;
+        console.log('hight',renderH);
+        console.log('renderer',renderer);
+        camera = new THREE.OrthographicCamera(
+            renderWidth / -2,
+            renderWidth / 2,
+            renderHeight / 2,
+            renderHeight / -2,
+            1,
+            1000
+        );
+         geometry = new THREE.PlaneBufferGeometry(
+            parent.offsetWidth,
+            parent.offsetHeight,
+            1
+        );
+        camera.aspect = renderW /renderH
+        camera.position.z = 1;
+        camera.updateProjectionMatrix();
+        renderer.setSize( renderW, renderH );
+    }
+    setsize();
+
+
     parent.appendChild( renderer.domElement );
 
     let loader = new THREE.TextureLoader();
@@ -84,16 +107,7 @@ const displacementSlider = function(opts) {
 
     let scene = new THREE.Scene();
     scene.background = new THREE.Color( 0xDCE1E3 );
-    let camera = new THREE.OrthographicCamera(
-        renderWidth / -2,
-        renderWidth / 2,
-        renderHeight / 2,
-        renderHeight / -2,
-        1,
-        1000
-    );
 
-    camera.position.z = 1;
 
     let mat = new THREE.ShaderMaterial({
         uniforms: {
@@ -107,11 +121,7 @@ const displacementSlider = function(opts) {
         opacity: 1.0
     });
 
-    let geometry = new THREE.PlaneBufferGeometry(
-        parent.offsetWidth,
-        parent.offsetHeight,
-        1
-    );
+
     let object = new THREE.Mesh(geometry, mat);
     object.position.set(0, 0, 0);
     scene.add(object);
@@ -235,6 +245,7 @@ const displacementSlider = function(opts) {
     addEvents();
 
     window.addEventListener( 'resize' , function(e) {
+        setsize();
         renderer.setSize(renderW, renderH);
     });
 
